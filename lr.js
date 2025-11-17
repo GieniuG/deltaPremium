@@ -31,16 +31,15 @@ async function wait(element){
 }
 function start(){
     if(document.querySelector("#cards")){
-        button.innerText="SOLVE"
         cardSolver()
     }else{
-        button.innerText="FILL IN"
         quizSolver()
     }
 }
 
 let button=document.createElement("button")
 button.style.float="right"
+button.innerText="SOLVE"
 button.addEventListener("click",()=>{
     start()
 })
