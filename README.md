@@ -1,3 +1,7 @@
+<p  align="center">
+	<img src="./icon.png">
+</p>
+
 # INSTALACJA:
 ## Dla chromium:
 1) Pobierasz to repo
