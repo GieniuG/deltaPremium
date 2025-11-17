@@ -8,6 +8,7 @@ videos.forEach(video=>{
     let a=document.createElement("a")
     a.href=url
     a.target="_blank"
+    a.style.fontSize="1rem"
     a.innerText="Download"
     div.appendChild(a)
     video.parentNode.appendChild(div)
