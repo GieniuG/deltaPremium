@@ -8,7 +8,7 @@
 ## Dla firefox:
 - Tu nie jest tak łatwo, może kiedyś podpiszę i tu wstawię ten plik
 
-# PRZYKŁADY
+# FUNKCJE
 ## Dopasowanie kart:
  ![karty](./cards.gif)
 ## Rozwiązanie quizu:
