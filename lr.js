@@ -29,19 +29,16 @@ async function wait(element){
         observer.observe(element,{attributes:true})
     })
 }
-function start(){
-    if(document.querySelector("#cards")){
-        cardSolver()
-    }else{
-        quizSolver()
-    }
-}
 
 let button=document.createElement("button")
 button.style.float="right"
 button.innerText="SOLVE"
 button.addEventListener("click",()=>{
-    start()
+    if(document.querySelector("#cards")){
+        cardSolver()
+    }else{
+        quizSolver()
+    }
 })
 let div=document.createElement("div")
 div.append(button)
