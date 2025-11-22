@@ -1,6 +1,23 @@
-.possible{
-    outline:blue 2px dashed;
+.possible {
+    outline: blue 2px dashed;
 }
-.selected{
+
+.selected {
     outline: green 2px solid;
+}
+
+.hint {
+    color: gray;
+    letter-spacing: 0.2em;
+}
+.deltaPremium-button {
+    float: right;
+    pointer-events: all;
+}
+.deltaPremium-button-container {
+    z-index: 100;
+    width: 95%;
+    position: fixed;
+    pointer-events: none;
+    top:0;
 }
