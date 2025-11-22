@@ -13,7 +13,8 @@
 		},{
             "matches":["*://learningapps.org/*"],
             "all_frames":true,
-            "js":["lr.js"]
+            "js":["lr.js"],
+            "css":["helpers.css"]
         }
 	]
 }

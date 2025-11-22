@@ -1,0 +1,6 @@
+.possible{
+    outline:blue 2px dashed;
+}
+.selected{
+    outline: green 2px solid;
+}
