@@ -96,4 +96,3 @@ window.addEventListener("load", () => {
         document.querySelector("body").prepend(buttonContainer)
     }
 })
-
