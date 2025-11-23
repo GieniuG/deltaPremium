@@ -172,12 +172,12 @@ function prepareQuizWordle() {
         }
     });
 
-    let observer = new MutationObserver((mutations) => {
+     let observer = new MutationObserver((mutations) => {
         if (mutations[0].target.firstElementChild.children) {
             observer.disconnect();
             document.querySelectorAll("input").forEach((input) => {
                 let wordleInputContainer = document.createElement("div");
-                wordleInputContainer.id = "wordle-input-container";
+                wordleInputContainer.classList.add("wordle-input-container");
                 input.nextElementSibling.after(wordleInputContainer);
                 input.style.display = "none";
                 let answer = input.nextElementSibling
@@ -204,10 +204,9 @@ function prepareQuizWordle() {
     document
         .querySelector("#checksolutionBtnPanel")
         .addEventListener("click", () => {
-            document.querySelectorAll("input").forEach((input) => {
+            document.querySelectorAll("input").forEach((input,index) => {
                 let wordleContainer = document.createElement("div");
                 wordleContainer.classList.add("wordle-container");
-                input.nextElementSibling.after(wordleContainer);
                 let usersAnswer = input.value.toUpperCase();
                 let answer = input.nextElementSibling
                     .getAttribute("data-content")
@@ -215,19 +214,25 @@ function prepareQuizWordle() {
                 usersAnswer.split("").forEach((letter, index) => {
                     let box = document.createElement("div");
                     box.classList.add("wordle-box");
+                    let right = true;
                     if (letter == answer[index]) {
                         box.classList.add("wordle-right");
                     } else if (answer.includes(letter)) {
+                        right = false;
                         box.classList.add("wordle-exists");
                     } else {
+                        right = false;
                         box.classList.add("wordle-wrong");
                     }
+                    wordleContainer.setAttribute("data-right",right);
                     box.innerText = letter;
                     wordleContainer.appendChild(box);
                 });
-                document
-                    .querySelector("#wordle-input-container")
-                    .after(wordleContainer);
+                let inputContainer = document.querySelectorAll(".wordle-input-container")[index];
+
+                if(!(inputContainer.nextElementSibling && inputContainer.nextElementSibling.getAttribute("data-right"))){
+                    inputContainer.after(wordleContainer);
+                };
             });
         });
 }

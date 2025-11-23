@@ -44,12 +44,12 @@
 .wordle-wrong{
     background-color: #787c7f;
 }
-.wordle-container,#wordle-input-container{
+.wordle-container,.wordle-input-container{
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
-#wordle-input-container span,.wordle-empty{
+.wordle-input-container span,.wordle-empty{
     color: black;
     border: 1px solid black;
 }
