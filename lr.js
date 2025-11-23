@@ -2,6 +2,7 @@ console.log("learningapps");
 const HELP = true;
 let showHelp = false;
 let lastInput = undefined;
+let lastWordle = undefined;
 
 let prepareLock = false;
 
@@ -85,17 +86,14 @@ function cardHelper() {
 
 function quizHelper() {
     if (lastInput) {
-        let answer =
-            lastInput.nextElementSibling.getAttribute(
-                "data-content",
-            );
+        let answer = lastInput.nextElementSibling.getAttribute("data-content");
         console.log(answer);
         let hintElement = lastInput.nextElementSibling.nextElementSibling;
         let revealed = parseInt(hintElement.getAttribute("data-letters"));
         if (!revealed) {
             revealed = 0;
         }
-        if(answer[revealed] == " "){
+        if (answer[revealed] == " ") {
             revealed++;
         }
         hintElement.setAttribute("data-letters", revealed + 1);
@@ -103,9 +101,9 @@ function quizHelper() {
         for (let i = 0; i < answer.length; i++) {
             if (i <= revealed) {
                 hintText += answer[i];
-            }else if (answer[i] == " ") {
+            } else if (answer[i] == " ") {
                 hintText += " ";
-            }else{
+            } else {
                 hintText += "_";
             }
         }
@@ -117,7 +115,7 @@ function prepareQuiz() {
         if (mutations[0].target.firstElementChild) {
             observer.disconnect();
             document.querySelectorAll("input").forEach((input) => {
-                let hintContainer = document.createElement("p");
+                let hintContainer = document.createElement("div");
                 hintContainer.classList.add("hint");
                 input.nextElementSibling.after(hintContainer);
                 input.addEventListener("click", () => {
@@ -130,6 +128,108 @@ function prepareQuiz() {
         subtree: true,
         childList: true,
     });
+}
+function prepareQuizWordle() {
+    window.addEventListener("keydown", (event) => {
+        if (lastWordle) {
+            //check if key is a letter/number
+            let len = parseInt(lastWordle.getAttribute("data-letters"));
+            let input = lastWordle.previousElementSibling.previousElementSibling;
+            let boxes = lastWordle.querySelectorAll(".wordle-box");
+            if (event.key.length == 1) {
+                if(len==boxes.length){
+                    return;
+                }
+                if (!len) {
+                    len = 0;
+                }
+                if (len >= boxes.length) {
+                    return;
+                }
+                if(boxes[len].classList.contains("wordle-space")){
+                    console.log("space");
+                    len++;
+                    input.value += " ";
+                }
+                boxes[len].innerText = event.key.toUpperCase();
+                input.value +=event.key.toUpperCase();
+                len++;
+                lastWordle.setAttribute("data-letters", len);
+            } else if (event.key == "Backspace") {
+                len--;
+                if(len>=0){
+                    let inputValueArray = input.value.split("");
+                    if(boxes[len].classList.contains("wordle-space")){
+                        inputValueArray.pop();
+                        len--;
+                    }
+                    inputValueArray.pop();
+                    input.value = inputValueArray.join("");
+                    boxes[len].innerText = "";
+                    lastWordle.setAttribute("data-letters", len);
+                }
+            }
+        }
+    });
+
+    let observer = new MutationObserver((mutations) => {
+        if (mutations[0].target.firstElementChild.children) {
+            observer.disconnect();
+            document.querySelectorAll("input").forEach((input) => {
+                let wordleInputContainer = document.createElement("div");
+                wordleInputContainer.id = "wordle-input-container";
+                input.nextElementSibling.after(wordleInputContainer);
+                input.style.display = "none";
+                let answer = input.nextElementSibling
+                    .getAttribute("data-content")
+                    .toUpperCase();
+                answer.split("").forEach((letter) => {
+                    let box = document.createElement("span");
+                    box.classList.add("wordle-box");
+                    if (letter == " ") {
+                        box.classList.add("wordle-space");
+                    }
+                    wordleInputContainer.appendChild(box);
+                });
+                wordleInputContainer.addEventListener("click", (event) => {
+                    lastWordle = wordleInputContainer;
+                });
+            });
+        }
+    });
+    observer.observe(document.querySelector("#content"), {
+        subtree: true,
+        childList: true,
+    });
+    document
+        .querySelector("#checksolutionBtnPanel")
+        .addEventListener("click", () => {
+            document.querySelectorAll("input").forEach((input) => {
+                let wordleContainer = document.createElement("div");
+                wordleContainer.classList.add("wordle-container");
+                input.nextElementSibling.after(wordleContainer);
+                let usersAnswer = input.value.toUpperCase();
+                let answer = input.nextElementSibling
+                    .getAttribute("data-content")
+                    .toUpperCase();
+                usersAnswer.split("").forEach((letter, index) => {
+                    let box = document.createElement("div");
+                    box.classList.add("wordle-box");
+                    if (letter == answer[index]) {
+                        box.classList.add("wordle-right");
+                    } else if (answer.includes(letter)) {
+                        box.classList.add("wordle-exists");
+                    } else {
+                        box.classList.add("wordle-wrong");
+                    }
+                    box.innerText = letter;
+                    wordleContainer.appendChild(box);
+                });
+                document
+                    .querySelector("#wordle-input-container")
+                    .after(wordleContainer);
+            });
+        });
 }
 let button = document.createElement("button");
 button.innerText = "SOLVE";
@@ -158,7 +258,8 @@ window.addEventListener("load", () => {
     if (!document.querySelector("iframe")) {
         document.querySelector("body").prepend(buttonContainer);
         if (!document.querySelector("#cards")) {
-            prepareQuiz();
+            //prepareQuiz();
+            prepareQuizWordle();
         }
     }
 });
