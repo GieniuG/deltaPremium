@@ -1,5 +1,5 @@
 {
-	"manifest_version":2,
+	"manifest_version":3,
 	"version":"1.0",
 	"name":"DeltaPremium",
 	"permissions":["activeTab"],
@@ -16,6 +16,9 @@
             "js":["lr.js"],
             "css":["helpers.css"]
         }
-	]
+	],
+    "action":{
+        "default_popup":"popup.html"
+    }
 }
 
