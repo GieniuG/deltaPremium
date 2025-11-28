@@ -56,3 +56,17 @@
 .wordle-space{
     background-color: darkgray;
 }
+#currentWordle{
+    position:relative;
+}
+#currentWordle::before{
+    position:absolute;
+    content:"";
+    border-right:3px solid black;
+    border-top:3px solid black;
+    rotate:45deg;
+    width: 20px;
+    height:20px;
+    left:-25px;
+    top:10px;
+}

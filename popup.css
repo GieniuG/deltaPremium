@@ -41,9 +41,7 @@ input[type="checkbox"]:checked+.slider:before {
     transform: translateX(100%);
 }
 
-.slider span {
-    transition: all 0.2s cubic-bezier(0.95, -0.08, 0.29, 1.04);
-}
+
 
 input[type="checkbox"]:checked+.slider span:nth-child(2) {
     color: #0e0e10;
@@ -58,7 +56,6 @@ input[type="checkbox"]:not(:checked)+.slider span:nth-child(1) {
 }
 
 .slider:before {
-    transition: all 0.2s cubic-bezier(0.95, -0.08, 0.29, 1.04);
     content: "";
     display: block;
     top: 0;
@@ -103,3 +100,6 @@ input[type="checkbox"]:not(:checked)+.slider span:nth-child(1) {
         }
         }
     }
+.trans::before,.trans span{
+    transition: all 0.2s cubic-bezier(0.95, -0.08, 0.29, 1.04);
+}

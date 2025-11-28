@@ -1,8 +1,35 @@
 console.log("learningapps");
-const HELP = true;
+const api = typeof browser !== 'undefined' ? browser : chrome;
+
+async function getSetting(key) {
+  try {
+    const response = await api.runtime.sendMessage({
+      action: "getSetting",
+      key: key
+    });
+    if (response.success) {
+      return response.value;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.error(e)
+    return null;
+  }
+}
+let HELP=false
+let SOLVE=false
+let MODE="default"
+async function applySettings(){
+    HELP=await getSetting("helper")
+    SOLVE=await getSetting("autoSolve")
+    MODE=await getSetting("mode")
+}
+
+
 let showHelp = false;
-let lastInput = undefined;
-let lastWordle = undefined;
+let currInput = undefined;
+let currWordle = undefined;
 
 let prepareLock = false;
 
@@ -85,10 +112,9 @@ function cardHelper() {
 }
 
 function quizHelper() {
-    if (lastInput) {
-        let answer = lastInput.nextElementSibling.getAttribute("data-content");
-        console.log(answer);
-        let hintElement = lastInput.nextElementSibling.nextElementSibling;
+    if (currInput) {
+        let answer = currInput.nextElementSibling.getAttribute("data-content");
+        let hintElement = currInput.nextElementSibling.nextElementSibling;
         let revealed = parseInt(hintElement.getAttribute("data-letters"));
         if (!revealed) {
             revealed = 0;
@@ -119,7 +145,7 @@ function prepareQuiz() {
                 hintContainer.classList.add("hint");
                 input.nextElementSibling.after(hintContainer);
                 input.addEventListener("click", () => {
-                    lastInput = input;
+                    currInput = input;
                 });
             });
         }
@@ -131,11 +157,11 @@ function prepareQuiz() {
 }
 function prepareQuizWordle() {
     window.addEventListener("keydown", (event) => {
-        if (lastWordle) {
+        if (currWordle) {
             //check if key is a letter/number
-            let len = parseInt(lastWordle.getAttribute("data-letters"));
-            let input = lastWordle.previousElementSibling.previousElementSibling;
-            let boxes = lastWordle.querySelectorAll(".wordle-box");
+            let len = parseInt(currWordle.getAttribute("data-letters"));
+            let input = currWordle.previousElementSibling.previousElementSibling;
+            let boxes = currWordle.querySelectorAll(".wordle-box");
             if (event.key.length == 1) {
                 if(len==boxes.length){
                     return;
@@ -147,14 +173,13 @@ function prepareQuizWordle() {
                     return;
                 }
                 if(boxes[len].classList.contains("wordle-space")){
-                    console.log("space");
                     len++;
                     input.value += " ";
                 }
                 boxes[len].innerText = event.key.toUpperCase();
                 input.value +=event.key.toUpperCase();
                 len++;
-                lastWordle.setAttribute("data-letters", len);
+                currWordle.setAttribute("data-letters", len);
             } else if (event.key == "Backspace") {
                 len--;
                 if(len>=0){
@@ -166,7 +191,7 @@ function prepareQuizWordle() {
                     inputValueArray.pop();
                     input.value = inputValueArray.join("");
                     boxes[len].innerText = "";
-                    lastWordle.setAttribute("data-letters", len);
+                    currWordle.setAttribute("data-letters", len);
                 }
             }
         }
@@ -192,7 +217,9 @@ function prepareQuizWordle() {
                     wordleInputContainer.appendChild(box);
                 });
                 wordleInputContainer.addEventListener("click", (event) => {
-                    lastWordle = wordleInputContainer;
+                    if(currWordle) currWordle.id=""
+                    currWordle = wordleInputContainer;
+                    currWordle.id="currentWordle"
                 });
             });
         }
@@ -236,35 +263,45 @@ function prepareQuizWordle() {
             });
         });
 }
-let button = document.createElement("button");
-button.innerText = "SOLVE";
-button.classList.add("deltaPremium-button");
-button.addEventListener("click", () => {
-    if (document.querySelector("#cards")) {
-        if (HELP) {
-            showHelp = true;
-            cardHelper();
-        } else {
-            cardSolver();
-        }
-    } else {
-        if (HELP) {
-            quizHelper();
-        } else {
-            quizSolver();
-        }
+function main(){
+    let buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("deltaPremium-button-container");
+    if(SOLVE){
+        let solveButton = document.createElement("button");
+        solveButton.innerText = "SOLVE";
+        solveButton.classList.add("deltaPremium-button");
+        solveButton.addEventListener("click", () => {
+            if(document.querySelector("#cards")){
+                cardSolver()
+            }else{
+                quizSolver()
+            }
+        })
+        buttonContainer.append(solveButton);
     }
-});
-let buttonContainer = document.createElement("div");
-buttonContainer.append(button);
-buttonContainer.classList.add("deltaPremium-button-container");
-
-window.addEventListener("load", () => {
-    if (!document.querySelector("iframe")) {
-        document.querySelector("body").prepend(buttonContainer);
+    if(HELP){
+        let helpButton = document.createElement("button");
+        helpButton.innerText = "HELP";
+        helpButton.classList.add("deltaPremium-button");
         if (!document.querySelector("#cards")) {
-            //prepareQuiz();
+            prepareQuiz();
+        }
+        helpButton.addEventListener("click", () => {
+            if(document.querySelector("#cards")){
+                showHelp=true;
+                cardHelper()
+            }else{
+                quizHelper()
+            }
+        })
+        buttonContainer.append(helpButton);
+        if(MODE=="wordle" && document.querySelector("#checksolutionBtnPanel")){
+            buttonContainer.style.display='none';
             prepareQuizWordle();
         }
     }
-});
+    if (!document.querySelector("iframe")) {
+        document.querySelector("body").prepend(buttonContainer);
+    }
+}
+applySettings().then(()=>main())
