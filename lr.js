@@ -192,6 +192,16 @@ function prepareQuizWordle() {
           boxes[len].innerText = "";
           currWordle.setAttribute("data-letters", len);
         }
+      }else if(event.key == "Enter") {
+          let containers =document.querySelectorAll(".wordle-input-container")
+            for(let i=0;i<containers.length;i++){
+              if(containers[i].id=="currentWordle"){
+                  currWordle.id = "";
+                  containers[i+1].id = "currentWordle";
+                  currWordle=containers[i+1];
+                  break;
+              }
+            }
       }
     }
   });
