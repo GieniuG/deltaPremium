@@ -1,5 +1,7 @@
+const api = typeof browser !== 'undefined' ? browser : chrome;
 console.log("content")
 const videos = document.querySelectorAll('video')
+
 videos.forEach(video=>{
     url = video.querySelector('source').src
     let div=document.createElement("div")
@@ -13,3 +15,43 @@ videos.forEach(video=>{
     div.appendChild(a)
     video.parentNode.appendChild(div)
 })
+getSetting("mode").then(resolvedValue => {
+  console.log("Resolved value:", resolvedValue);
+});
+
+
+async function getSetting(key) {
+  try {
+    const response = await api.runtime.sendMessage({
+      action: "getSetting",
+      key: key
+    });
+    if (response.success) {
+        console.log(response)
+      return response.value;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.error(e)
+    return null;
+  }
+}
+
+async function getSetting(key) {
+  try {
+    const response = await api.runtime.sendMessage({
+      action: "getSetting",
+      key: key
+    });
+    if (response.success) {
+        console.log(response)
+      return response.value;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.error(e)
+    return null;
+  }
+}

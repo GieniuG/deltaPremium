@@ -1,0 +1,105 @@
+:root {
+    --on: #cfa45a;
+    --off: #8f805f;
+    --text: #f2f2f2;
+    --accent: #2a2a2b;
+}
+
+* {
+    font-family: Inter;
+    color: var(--text);
+    font-weight: 500
+}
+
+body {
+    background: #1b1b20;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.slider {
+    display: block;
+    cursor: pointer;
+    border: 3px solid var(--accent);
+    margin-top: 0.5rem;
+    border-radius: 1em;
+    padding: 0.3rem;
+    background-color: #1e1e1f;
+    font-weight: bold;
+    position: relative;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+}
+
+input[type="checkbox"]:checked+.slider:before {
+    background-color: var(--on);
+    transform: translateX(100%);
+}
+
+
+
+input[type="checkbox"]:checked+.slider span:nth-child(2) {
+    color: #0e0e10;
+}
+
+input[type="checkbox"]:not(:checked)+.slider span:nth-child(1) {
+    color: #111113;
+}
+
+.slider span {
+    z-index: 1;
+}
+
+.slider:before {
+    content: "";
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 50%;
+    border-radius: 1em;
+    background-color: var(--off);
+    position: absolute;
+    z-index: 0;
+}
+
+.mode-slider:before {
+    background-color: var(--on);
+}
+
+.off .slider:before {
+    background-color: #4b4b52 !important;
+}
+.off .slider{
+    cursor: not-allowed;
+}
+.off {
+    --text-off-state-on: #a3a3aa;
+    --text-off-state-off: #6f6f75;
+
+
+    &:has(input[type="checkbox"]:checked) .slider span {
+        &:nth-child(2){
+            color: var(--text-off-state-on);
+        }
+        &:nth-child(1){
+            color: var(--text-off-state-off);
+        }
+        }
+    &:has(input[type="checkbox"]:not(:checked)) .slider span {
+        &:nth-child(1){
+            color:var(--text-off-state-on);
+        }
+        &:nth-child(2){
+            color: var(--text-off-state-off);
+        }
+        }
+    }
+.trans::before,.trans span{
+    transition: all 0.2s cubic-bezier(0.95, -0.08, 0.29, 1.04);
+}

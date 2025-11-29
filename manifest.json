@@ -15,5 +15,11 @@
             "all_frames":true,
             "js":["lr.js"]
         }
-	]
+    ],
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "service_worker": "service-worker.js"
+    }
 }

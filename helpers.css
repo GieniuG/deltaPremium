@@ -1,0 +1,72 @@
+.possible {
+    outline: blue 2px dashed;
+}
+
+.selected {
+    outline: green 2px solid;
+}
+
+.hint {
+    color: gray;
+    letter-spacing: 0.2em;
+}
+.deltaPremium-button {
+    float: right;
+    pointer-events: all;
+}
+.deltaPremium-button-container {
+    z-index: 100;
+    width: 95%;
+    position: fixed;
+    pointer-events: none;
+    top:0;
+}
+.wordle-box,.wordle-space{
+    color:white;
+    font-weight: bold;
+    font-size: 1.5em;
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center;
+    line-height: 1.5em;
+    border-radius: 0.1em;
+    background-color: white;
+    margin-right: 0.1em;
+    margin-bottom: 0.1em;
+}
+.wordle-right {
+    background-color: #6aab65;
+}
+.wordle-exists{
+    background-color: #c9b458;
+}
+.wordle-wrong{
+    background-color: #787c7f;
+}
+.wordle-container,.wordle-input-container{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.wordle-input-container span,.wordle-empty{
+    color: black;
+    border: 1px solid black;
+}
+.wordle-space{
+    background-color: darkgray;
+}
+#currentWordle{
+    position:relative;
+}
+#currentWordle::before{
+    position:absolute;
+    content:"";
+    border-right:3px solid black;
+    border-top:3px solid black;
+    rotate:45deg;
+    width: 20px;
+    height:20px;
+    left:-25px;
+    top:10px;
+}
