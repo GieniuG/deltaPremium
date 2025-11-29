@@ -1,34 +1,19 @@
 {
-    "manifest_version": 3,
-    "version": "2.0",
-    "name": "DeltaPremium",
-    "permissions": [
-        "activeTab",
-        "storage"
-    ],
-    "icons": {
-        "48": "icon.png"
-    },
-    "content_scripts": [
-        {
-            "matches": [
-                "*://delta.pk.edu.pl/*"
-            ],
-            "js": [
-                "content.js"
-            ]
-        },
-        {
-            "matches": [
-                "*://learningapps.org/*"
-            ],
-            "all_frames": true,
-            "js": [
-                "lr.js"
-            ],
-            "css": [
-                "helpers.css"
-            ]
+	"manifest_version":3,
+	"version":"1.0",
+	"name":"DeltaPremium",
+	"permissions":["activeTab"],
+	"icons":{
+		"48": "icon.png"
+	},
+	"content_scripts": [
+		{
+			"matches":["*://delta.pk.edu.pl/*"],
+			"js":["content.js"]
+		},{
+            "matches":["*://learningapps.org/*"],
+            "all_frames":true,
+            "js":["lr.js"]
         }
     ],
     "action": {
