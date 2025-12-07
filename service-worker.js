@@ -1,4 +1,5 @@
 const api = typeof browser !== 'undefined' ? browser : chrome;
+api.storage.local.set({"mode":"default"})
 api.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log("HELLO o/")
     if (request.action === "getSetting") {
