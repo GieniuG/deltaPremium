@@ -1,5 +1,5 @@
 <p  align="center">
-	<img src="./icon.png">
+	<img src="./media/icon.png">
 </p>
 
 # INSTALACJA:
@@ -14,19 +14,19 @@
 
 # FUNKCJE
 ## POBIERANIE WIDEO:
-![wideo](./deltaPremium_download.png)
+![wideo](./media/deltaPremium_download.png)
 
 ## AUTO UZUPERŁNIANIE:
 ### Dopasowanie kart:
- ![karty](./cards.gif)
+ ![karty](./media/cards.gif)
 ### Rozwiązanie quizu:
- ![quiz](./quiz.gif)
+ ![quiz](./media/quiz.gif)
 
 ## POMOC:
 ### Dopasowanie kart:
- ![karty](./cards_help.gif)
+ ![karty](./media/cards_help.gif)
 ### Rozwiązanie quizu:
- ![quiz](./quiz_help.gif)
+ ![quiz](./media/quiz_help.gif)
 ### Wordle:
- ![wordle](./wordle.gif)
+ ![wordle](./media/wordle.gif)
 
