@@ -1,4 +1,31 @@
-async function getJsonp(url){
+let a,map;
+async function crosswordSolver(){
+    console.log(map)
+    map=mapOutCrossword()
+    a.forEach((word,wordIndex)=>{
+        word.split("").forEach((letter,letterIndex)=>{
+            map[wordIndex][letterIndex].innerText=letter
+        })
+    })
+}
+async function prepCrossword(){
+    console.log("prep crossword")
+    let scripts = document.querySelectorAll("script");
+    for(const script of scripts){
+        if(script.src.includes("jsonp")){
+            let data = await getInitpar(script.src);
+            data = data.toUpperCase();
+            a=[...data.matchAll(/WORD\d+=TEXT%7C(.*?)&/g)].map(x=>x[1].replace(/%20/,""));
+            map=mapOutCrossword()
+        }
+    }
+}
+function crosswordHelper(){
+    idx=parseInt(document.querySelector("#questionDisplay").querySelector("div").id.replace("item",""))-1
+    console.log(map)
+    document.querySelector("#"+map[idx][0].id).innerText="A"
+}
+async function getInitpar(url){
     const res = await fetch(url);
     let text = await res.text()
     text = text
@@ -11,10 +38,7 @@ async function getJsonp(url){
 function mapOutCrossword(){
     let map=[]
     let crossword = document.querySelector("#innerCrossword");
-    let grids = crossword.querySelectorAll(".filled");
     let startFields = [...crossword.querySelectorAll("td:has(:last-child:nth-child(2))")];
-    console.log("startFields 1:")
-    console.log(startFields)
     //find first grid
     startFields=startFields.filter(el=>{
         if(el.childElementCount==2 && !el.querySelector(".solution") || el.childElementCount==3){
