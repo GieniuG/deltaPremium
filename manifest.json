@@ -27,7 +27,8 @@
                 "./src/js/lr.js",
                 "./src/js/functions/cardFunctions.js",
                 "./src/js/functions/quizFunctions.js",
-                "./src/js/functions/crosswordFunctions.js"
+                "./src/js/functions/crosswordFunctions.js",
+                "./src/js/functions/oppositesFunctions.js"
             ],
             "css": [
                 "./src/css/helpers.css"

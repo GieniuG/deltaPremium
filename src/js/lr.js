@@ -46,7 +46,11 @@ async function main() {
         solveButton.classList.add("deltaPremium-button");
         solveButton.addEventListener("click", () => {
             if (document.querySelector("#cards")) {
-                cardSolver();
+                if(document.querySelector(".card textarea")){
+                    oppositesSolver();
+                }else{
+                    cardSolver();
+                }
             } else if (document.querySelector("#content")) {
                 quizSolver();
             } else if (document.querySelector("#crossword")) {
@@ -70,8 +74,12 @@ async function main() {
         }
         helpButton.addEventListener("click", () => {
             if (document.querySelector("#cards")) {
-                showHelp = true;
-                cardHelper();
+                if(document.querySelector(".card textarea")){
+                    alert("Pomoc nie jest dostepna w tym trybie (na razie)")
+                }else{
+                    showHelp = true;
+                    cardHelper();
+                }
             } else if (document.querySelector("#content")) {
                 quizHelper();
             } else if (document.querySelector("#crossword")) {
