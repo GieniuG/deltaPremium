@@ -21,7 +21,12 @@
  ![karty](./media/cards.gif)
 ### Rozwiązanie quizu:
  ![quiz](./media/quiz.gif)
-
+### Rozwiązywanie krzyżówki:
+ ![crossword](./media/crossword_solve.gif)
+### Przeciwieństwa:
+ ![opposites](./media/opposites_solve.gif)
+### Wybieranie z listy:
+ ![dropdown](./media/dropdown_solve.gif)
 ## POMOC:
 ### Dopasowanie kart:
  ![karty](./media/cards_help.gif)
@@ -29,4 +34,5 @@
  ![quiz](./media/quiz_help.gif)
 ### Wordle:
  ![wordle](./media/wordle.gif)
-
+### Rozwiązywanie krzyżówki:
+ ![crossword](./media/crossword_help.gif)
