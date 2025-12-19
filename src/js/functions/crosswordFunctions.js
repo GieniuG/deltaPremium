@@ -1,6 +1,5 @@
 let a,map;
 async function crosswordSolver(){
-    console.log(map)
     map=mapOutCrossword()
     a.forEach((word,wordIndex)=>{
         word.split("").forEach((letter,letterIndex)=>{
@@ -21,9 +20,14 @@ async function prepCrossword(){
     }
 }
 function crosswordHelper(){
-    idx=parseInt(document.querySelector("#questionDisplay").querySelector("div").id.replace("item",""))-1
-    console.log(map)
-    document.querySelector("#"+map[idx][0].id).innerText="A"
+    let blocks=[...document.querySelectorAll("#questionDisplay .field.filled")]
+    let blink=document.querySelector(".blink")
+    let wordId=parseInt(document.querySelector("#questionDisplay div").id.match(/\d+/)[0])-1
+    let letterId=blocks.indexOf(blink)
+    let input=document.querySelector(".inputElement.filled")
+
+    input.value=a[wordId][letterId]
+    input.dispatchEvent(new KeyboardEvent("keyup",{bubbles:true,keyCode:65}))
 }
 async function getInitpar(url){
     const res = await fetch(url);
