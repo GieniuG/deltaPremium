@@ -9,15 +9,11 @@ async function crosswordSolver(){
 }
 async function prepCrossword(){
     console.log("prep crossword")
-    let scripts = document.querySelectorAll("script");
-    for(const script of scripts){
-        if(script.src.includes("jsonp")){
-            let data = await getInitpar(script.src);
-            data = data.toUpperCase();
-            a=[...data.matchAll(/WORD\d+=TEXT%7C(.*?)&/g)].map(x=>x[1].replace(/%20/,""));
-            map=mapOutCrossword()
-        }
-    }
+    url = getJsonpUrl();
+    let data = await getInitpar(url);
+    data = data.toUpperCase();
+    a=[...data.matchAll(/WORD\d+=TEXT%7C(.*?)&/g)].map(x=>x[1].replace(/%20/,""));
+    map=mapOutCrossword()
 }
 function crosswordHelper(){
     let blocks=[...document.querySelectorAll("#questionDisplay .field.filled")]
@@ -28,16 +24,6 @@ function crosswordHelper(){
 
     input.value=a[wordId][letterId]
     input.dispatchEvent(new KeyboardEvent("keyup",{bubbles:true,keyCode:65}))
-}
-async function getInitpar(url){
-    const res = await fetch(url);
-    let text = await res.text()
-    text = text
-        .replace(/^var\s+AppClientAppData\s*=\s*/, "")
-        .replace(/;\s*$/, "");
-    const json = JSON.parse(text);
-
-    return json.initparameters
 }
 function mapOutCrossword(){
     let map=[]
