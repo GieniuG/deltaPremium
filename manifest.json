@@ -24,6 +24,7 @@
             ],
             "all_frames": true,
             "js": [
+                "./src/js/util.js",
                 "./src/js/lr.js",
                 "./src/js/functions/cardFunctions.js",
                 "./src/js/functions/quizFunctions.js",

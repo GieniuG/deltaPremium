@@ -52,7 +52,12 @@ async function main() {
                     cardSolver();
                 }
             } else if (document.querySelector("#content")) {
-                quizSolver();
+                if(document.querySelector(".dropdown")){
+                    dropdownSolver();
+                }else{
+                    console.log("quiz")
+                    quizSolver();
+                }
             } else if (document.querySelector("#crossword")) {
                 crosswordSolver();
             }
@@ -65,12 +70,12 @@ async function main() {
         helpButton.classList.add("deltaPremium-button");
         if (document.querySelector("#content")) {
             //quiz only needs to be prepared for help
-            if (MODE == "default") {
-                prepareQuiz();
-            } else if (MODE == "wordle") {
-                buttonContainer.style.display = "none";
-                prepareQuizWordle();
-            }
+                if (MODE == "default") {
+                    prepareQuiz();
+                } else if (MODE == "wordle") {
+                    buttonContainer.style.display = "none";
+                    prepareQuizWordle();
+                }
         }
         helpButton.addEventListener("click", () => {
             if (document.querySelector("#cards")) {
@@ -81,7 +86,11 @@ async function main() {
                     cardHelper();
                 }
             } else if (document.querySelector("#content")) {
-                quizHelper();
+                if(document.querySelector(".dropdown")){
+                    alert("Pomoc nie jest dostepna w tym trybie (i nie będzie)")
+                }else{
+                    quizHelper();
+                }
             } else if (document.querySelector("#crossword")) {
                 crosswordHelper();
             }

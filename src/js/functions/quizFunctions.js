@@ -4,13 +4,13 @@ function quizSolver() {
     document.querySelectorAll("input").forEach((input) => {
         let answer = input.nextElementSibling.getAttribute("data-content");
         if (answer.includes(";")) {
-            nrOfAnswers = answer.split(";").length
-            answer = answer.split(";")[i]
-            i++
+            nrOfAnswers = answer.split(";").length;
+            answer = answer.split(";")[i];
+            i++;
         }
         if (i >= nrOfAnswers) {
-            i = 0
-            nrOfAnswers = 0
+            i = 0;
+            nrOfAnswers = 0;
         }
         input.value = answer;
     });
@@ -52,16 +52,16 @@ function prepareQuiz() {
                 hintContainer.classList.add("hint");
                 let answer = input.nextElementSibling.getAttribute("data-content");
                 if (answer.includes(";")) {
-                    nrOfAnswers = answer.split(";").length
-                    answer = answer.split(";")[i]
+                    nrOfAnswers = answer.split(";").length;
+                    answer = answer.split(";")[i];
                     i++;
                 }
-                console.log(answer,i,nrOfAnswers)
+                console.log(answer, i, nrOfAnswers);
                 if (i >= nrOfAnswers) {
-                    i = 0
-                    nrOfAnswers = 0
+                    i = 0;
+                    nrOfAnswers = 0;
                 }
-                hintContainer.setAttribute("data-content",answer);
+                hintContainer.setAttribute("data-content", answer);
                 input.nextElementSibling.after(hintContainer);
                 input.addEventListener("click", () => {
                     currInput = input;
@@ -200,4 +200,27 @@ function prepareQuizWordle() {
                 }
             });
         });
+}
+
+async function dropdownSolver() {
+    let url = getJsonpUrl();
+    let data = await getInitpar(url);
+    data = data.toLowerCase().replace(/%20/g, "");
+    let i = 0;
+    let buttons = document.querySelectorAll(".btn");
+    for (ans of data.matchAll(/cloze\d+=(.*?)&/g)) {
+        let button = buttons[i++];
+        button.dispatchEvent(
+            new MouseEvent("click", { bubbles: true, button: 0 }),
+        );
+        button.nextElementSibling.querySelectorAll("li").forEach((li) => {
+            let a = li.querySelector("a");
+            if (
+                a.getAttribute("data-value").toLowerCase() ==
+                ans[1]
+            ) {
+                a.dispatchEvent(new MouseEvent("click", { bubbles: true, button: 0 }));
+            }
+        });
+    }
 }
