@@ -1,13 +1,25 @@
 function quizSolver() {
+    let i = 0;
+    let nrOfAnswers = 0;
     document.querySelectorAll("input").forEach((input) => {
-        input.value = input.nextElementSibling.getAttribute("data-content");
+        let answer = input.nextElementSibling.getAttribute("data-content");
+        if (answer.includes(";")) {
+            nrOfAnswers = answer.split(";").length
+            answer = answer.split(";")[i]
+            i++
+        }
+        if (i >= nrOfAnswers) {
+            i = 0
+            nrOfAnswers = 0
+        }
+        input.value = answer;
     });
 }
 
 function quizHelper() {
     if (currInput) {
-        let answer = currInput.nextElementSibling.getAttribute("data-content");
         let hintElement = currInput.nextElementSibling.nextElementSibling;
+        let answer = hintElement.getAttribute("data-content");
         let revealed = parseInt(hintElement.getAttribute("data-letters"));
         if (!revealed) {
             revealed = 0;
@@ -30,12 +42,26 @@ function quizHelper() {
     }
 }
 function prepareQuiz() {
+    let i = 0;
+    let nrOfAnswers = 0;
     let observer = new MutationObserver((mutations) => {
         if (mutations[0].target.firstElementChild) {
             observer.disconnect();
             document.querySelectorAll("input").forEach((input) => {
                 let hintContainer = document.createElement("div");
                 hintContainer.classList.add("hint");
+                let answer = input.nextElementSibling.getAttribute("data-content");
+                if (answer.includes(";")) {
+                    nrOfAnswers = answer.split(";").length
+                    answer = answer.split(";")[i]
+                    i++;
+                }
+                console.log(answer,i,nrOfAnswers)
+                if (i >= nrOfAnswers) {
+                    i = 0
+                    nrOfAnswers = 0
+                }
+                hintContainer.setAttribute("data-content",answer);
                 input.nextElementSibling.after(hintContainer);
                 input.addEventListener("click", () => {
                     currInput = input;
@@ -87,7 +113,7 @@ function prepareQuizWordle() {
                     currWordle.setAttribute("data-letters", len);
                 }
             } else if (event.key == "Enter") {
-                let containers = document.querySelectorAll(".wordle-input-container")
+                let containers = document.querySelectorAll(".wordle-input-container");
                 for (let i = 0; i < containers.length; i++) {
                     if (containers[i].id == "currentWordle") {
                         currWordle.id = "";
@@ -162,8 +188,14 @@ function prepareQuizWordle() {
                 let inputContainer = document.querySelectorAll(
                     ".wordle-input-container",
                 )[index];
-                if (!(inputContainer.nextElementSibling && inputContainer.nextElementSibling.getAttribute("data-right") == "true")) {
-                    console.log("append")
+                if (
+                    !(
+                        inputContainer.nextElementSibling &&
+                        inputContainer.nextElementSibling.getAttribute("data-right") ==
+                        "true"
+                    )
+                ) {
+                    console.log("append");
                     inputContainer.after(wordleContainer);
                 }
             });
