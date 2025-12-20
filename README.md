@@ -1,5 +1,5 @@
 <p  align="center">
-	<img src="./media/icon.png">
+	<img src="./icon.png">
 </p>
 
 # INSTALACJA:
@@ -19,25 +19,25 @@
 
 # FUNKCJE
 ## POBIERANIE WIDEO:
-![wideo](./media/deltaPremium_download.png)
+![wideo](./assets/deltaPremium_download.png)
 
 ## AUTO UZUPERŁNIANIE:
 ### Dopasowanie kart:
- ![karty](./media/cards.gif)
+ ![karty](./assets/cards.gif)
 ### Rozwiązanie quizu:
- ![quiz](./media/quiz.gif)
+ ![quiz](./assets/quiz.gif)
 ### Rozwiązywanie krzyżówki:
- ![crossword](./media/crossword_solve.gif)
+ ![crossword](./assets/crossword_solve.gif)
 ### Przeciwieństwa:
- ![opposites](./media/opposites_solve.gif)
+ ![opposites](./assets/opposites_solve.gif)
 ### Wybieranie z listy:
- ![dropdown](./media/dropdown_solve.gif)
+ ![dropdown](./assets/dropdown_solve.gif)
 ## POMOC:
 ### Dopasowanie kart:
- ![karty](./media/cards_help.gif)
+ ![karty](./assets/cards_help.gif)
 ### Rozwiązanie quizu:
- ![quiz](./media/quiz_help.gif)
+ ![quiz](./assets/quiz_help.gif)
 ### Wordle:
- ![wordle](./media/wordle.gif)
+ ![wordle](./assets/wordle.gif)
 ### Rozwiązywanie krzyżówki:
- ![crossword](./media/crossword_help.gif)
+ ![crossword](./assets/crossword_help.gif)
