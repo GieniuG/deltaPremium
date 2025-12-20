@@ -1,13 +1,13 @@
 {
     "manifest_version": 3,
-    "version": "2.0",
+    "version": "2.2",
     "name": "DeltaPremium",
     "permissions": [
         "activeTab",
         "storage"
     ],
     "icons": {
-        "48": "icon.png"
+        "48": "./media/icon.png"
     },
     "content_scripts": [
         {
@@ -15,7 +15,7 @@
                 "*://delta.pk.edu.pl/*"
             ],
             "js": [
-                "content.js"
+                "./src/js/content.js"
             ]
         },
         {
@@ -24,18 +24,29 @@
             ],
             "all_frames": true,
             "js": [
-                "lr.js"
+                "./src/js/util.js",
+                "./src/js/lr.js",
+                "./src/js/functions/cardFunctions.js",
+                "./src/js/functions/quizFunctions.js",
+                "./src/js/functions/crosswordFunctions.js",
+                "./src/js/functions/oppositesFunctions.js"
             ],
             "css": [
-                "helpers.css"
+                "./src/css/helpers.css"
             ]
         }
     ],
     "action": {
-        "default_popup": "popup.html"
+        "default_popup": "./src/html/popup.html"
     },
     "background": {
-        "service_worker": "service-worker.js"
+        "scripts": ["./src/js/service-worker.js"],
+        "type": "module"
+    },
+    "browser_specific_settings": {
+    "gecko": {
+        "id": "deltaPremium@torus.uck.pk.edu.pl"
     }
+}
 }
 

@@ -1,32 +1,43 @@
 <p  align="center">
-	<img src="./icon.png">
+	<img src="./media/icon.png">
 </p>
 
 # INSTALACJA:
 ## Dla chromium:
-1) Pobierasz to repo
+1) Pobierasz to najnowszy [release](https://github.com/GieniuG/deltaPremium/releases) (lub to repo)
+3) Rozpakujesz plik zip
 2) Wchodzisz w ustawienia wtyczek
 3) Włączasz developer mode 
 4) Klikasz "Load unpacked" 
 5) Wybierasz folder z tym rozszerzeniem i się cieszysz 
 ## Dla firefox:
-- Firefox nie wspiera w pełni manifestV3 a że nie chce mi się się robić dwóch osobnych to na stan obecny nie działa tam, jak będzie potrzeba to można otworzyć issue i się coś pomyśli
+1) Pobierasz to najnowszy [release](https://github.com/GieniuG/deltaPremium/releases)
+2) Wchodzisz w ustawienia wtyczek
+3) Install Add-on From File
+4) Wybierasz plik .xpi
+5) Klikasz "Add"
 
 # FUNKCJE
 ## POBIERANIE WIDEO:
-![wideo](./deltaPremium_download.png)
+![wideo](./media/deltaPremium_download.png)
 
 ## AUTO UZUPERŁNIANIE:
 ### Dopasowanie kart:
- ![karty](./cards.gif)
+ ![karty](./media/cards.gif)
 ### Rozwiązanie quizu:
- ![quiz](./quiz.gif)
-
+ ![quiz](./media/quiz.gif)
+### Rozwiązywanie krzyżówki:
+ ![crossword](./media/crossword_solve.gif)
+### Przeciwieństwa:
+ ![opposites](./media/opposites_solve.gif)
+### Wybieranie z listy:
+ ![dropdown](./media/dropdown_solve.gif)
 ## POMOC:
 ### Dopasowanie kart:
- ![karty](./cards_help.gif)
+ ![karty](./media/cards_help.gif)
 ### Rozwiązanie quizu:
- ![quiz](./quiz_help.gif)
+ ![quiz](./media/quiz_help.gif)
 ### Wordle:
- ![wordle](./wordle.gif)
-
+ ![wordle](./media/wordle.gif)
+### Rozwiązywanie krzyżówki:
+ ![crossword](./media/crossword_help.gif)
