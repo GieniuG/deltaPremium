@@ -4,13 +4,18 @@
 
 # INSTALACJA:
 ## Dla chromium:
-1) Pobierasz to repo
+1) Pobierasz to najnowszy ![release](https://github.com/GieniuG/deltaPremium/releases) (lub to repo)
+3) Rozpakujesz plik zip
 2) Wchodzisz w ustawienia wtyczek
 3) Włączasz developer mode 
 4) Klikasz "Load unpacked" 
 5) Wybierasz folder z tym rozszerzeniem i się cieszysz 
 ## Dla firefox:
-- Firefox nie wspiera w pełni manifestV3 a że nie chce mi się się robić dwóch osobnych to na stan obecny nie działa tam, jak będzie potrzeba to można otworzyć issue i się coś pomyśli
+1) Pobierasz to najnowszy ![release](https://github.com/GieniuG/deltaPremium/releases)
+2) Wchodzisz w ustawienia wtyczek
+3) Install Add-on From File
+4) Wybierasz plik .xpi
+5) Klikasz "Add"
 
 # FUNKCJE
 ## POBIERANIE WIDEO:
