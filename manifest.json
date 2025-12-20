@@ -40,7 +40,13 @@
         "default_popup": "./src/html/popup.html"
     },
     "background": {
-        "service_worker": "./src/js/service-worker.js"
+        "scripts": ["./src/js/service-worker.js"],
+        "type": "module"
+    },
+    "browser_specific_settings": {
+    "gecko": {
+        "id": "deltaPremium@torus.uck.pk.edu.pl"
     }
+}
 }
 
