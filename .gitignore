@@ -1,2 +1,5 @@
 ./not-included/
 web-ext-artifacts/
+
+.amo-upload-uuid
+

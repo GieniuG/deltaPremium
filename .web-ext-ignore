@@ -7,3 +7,4 @@ web-ext-artifacts/
 
 .git/
 .gitignore
+.amo-upload-uuid
