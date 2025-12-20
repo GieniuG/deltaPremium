@@ -1,13 +1,13 @@
 {
     "manifest_version": 3,
-    "version": "2.2",
+    "version": "2.3.3",
     "name": "DeltaPremium",
     "permissions": [
         "activeTab",
         "storage"
     ],
     "icons": {
-        "48": "./media/icon.png"
+        "64": "./icon.png"
     },
     "content_scripts": [
         {

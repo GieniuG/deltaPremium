@@ -1,0 +1,10 @@
+assets/**
+build.sh
+README.md
+LICENSE
+
+web-ext-artifacts/**
+
+.git/**
+.gitignore
+.amo-upload-uuid
