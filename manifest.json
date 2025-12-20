@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "version": "2.3",
+    "version": "2.3.3",
     "name": "DeltaPremium",
     "permissions": [
         "activeTab",

@@ -1,10 +1,10 @@
-assets/
+assets/**
 build.sh
 README.md
 LICENSE
 
-web-ext-artifacts/
+web-ext-artifacts/**
 
-.git/
+.git/**
 .gitignore
 .amo-upload-uuid
