@@ -1,8 +1,9 @@
 #!/bin/bash
 
 echo "> Build for chrome"
+name="deltapremium-$(jq -r ".version" manifest.json.chrome).zip"
 cp manifest.json.chrome manifest.json
-npx web-ext build --ignore-files="assets/**" --overwrite-dest --filename="deltaPremium.zip"
+npx web-ext build --ignore-files="assets/**" --overwrite-dest --filename="$name"
 
 echo ""
 echo "> Build for firefox"
