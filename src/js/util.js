@@ -31,3 +31,19 @@ function getJsonpUrl(){
         }
     }
 }
+async function getSetting(key) {
+    try {
+        const response = await api.runtime.sendMessage({
+            action: "getSetting",
+            key: key,
+        });
+        if (response.success) {
+            return response.value;
+        } else {
+            return null;
+        }
+    } catch (e) {
+        console.error(e);
+        return null;
+    }
+}

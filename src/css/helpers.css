@@ -70,3 +70,19 @@
     left:-25px;
     top:10px;
 }
+
+.spinner{
+    width: 100px;
+    height: 100px;
+    background-color: goldenrod;
+    animation: spin linear alternate-reverse;
+}
+@keyframes spin {
+    from{
+        rotate: 0;
+    }
+    to{
+        rotate: 359deg;
+    }
+    
+}
