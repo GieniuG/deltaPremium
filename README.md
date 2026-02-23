@@ -20,6 +20,11 @@
 # FUNKCJE
 ## POBIERANIE WIDEO:
 ![wideo](./assets/deltaPremium_download.png)
+## ODPOWIADANIE NA PYTANIA NA PODSTAWIE WIDEO:
+![gemini](./assets/geminiVideo.png)
+> [!IMPORTANT]
+> Ta funkcja działa tylko gdy podane jest prawidłowe API do gemini które można zdobyć tutaj totalnie za **darmo** [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey )
+
 
 ## AUTO UZUPERŁNIANIE:
 ### Dopasowanie kart:
@@ -41,3 +46,8 @@
  ![wordle](./assets/wordle.gif)
 ### Rozwiązywanie krzyżówki:
  ![crossword](./assets/crossword_help.gif)
+
+
+
+
+ https://aistudio.google.com/app/apikey
