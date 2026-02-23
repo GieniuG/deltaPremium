@@ -1,22 +1,6 @@
 console.log("learningapps");
 const api = typeof browser !== "undefined" ? browser : chrome;
 
-async function getSetting(key) {
-    try {
-        const response = await api.runtime.sendMessage({
-            action: "getSetting",
-            key: key,
-        });
-        if (response.success) {
-            return response.value;
-        } else {
-            return null;
-        }
-    } catch (e) {
-        console.error(e);
-        return null;
-    }
-}
 let HELP = false;
 let SOLVE = false;
 let MODE = "default";

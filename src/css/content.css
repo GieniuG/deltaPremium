@@ -1,0 +1,20 @@
+.spinner{
+    --size:50px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 100%;
+    border: 5px solid #cfa45a;
+    border-left: 5px solid transparent;
+    animation: infinite spin linear 5s;
+    position: relative;
+    left:calc(100% / 2 - var(--size) / 2)
+}
+@keyframes spin {
+    from{
+        rotate: 0;
+    }
+    to{
+        rotate: 359deg;
+    }
+    
+}
