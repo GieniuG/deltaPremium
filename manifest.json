@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "version": "2.4.0",
+    "version": "2.4.1",
     "name": "DeltaPremium",
     "permissions": [
         "activeTab",
@@ -43,13 +43,8 @@
         "default_popup": "./src/html/popup.html"
     },
     "background": {
-        "scripts": ["./src/js/service-worker.js"],
+        "service_worker": "./src/js/service-worker.js",
         "type": "module"
-    },
-    "browser_specific_settings": {
-    "gecko": {
-        "id": "deltaPremium@torus.uck.pk.edu.pl"
     }
-}
 }
 
