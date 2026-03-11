@@ -32,7 +32,8 @@
                 "./src/js/functions/cardFunctions.js",
                 "./src/js/functions/quizFunctions.js",
                 "./src/js/functions/crosswordFunctions.js",
-                "./src/js/functions/oppositesFunctions.js"
+                "./src/js/functions/oppositesFunctions.js",
+                "./src/js/functions/memoryFunctions.js"
             ],
             "css": [
                 "./src/css/helpers.css"

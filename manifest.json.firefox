@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "version": "2.4.1",
+    "version": "2.4.2",
     "name": "DeltaPremium",
     "permissions": [
         "activeTab",
@@ -32,7 +32,8 @@
                 "./src/js/functions/cardFunctions.js",
                 "./src/js/functions/quizFunctions.js",
                 "./src/js/functions/crosswordFunctions.js",
-                "./src/js/functions/oppositesFunctions.js"
+                "./src/js/functions/oppositesFunctions.js",
+                "./src/js/functions/memoryFunctions.js"
             ],
             "css": [
                 "./src/css/helpers.css"

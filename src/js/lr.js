@@ -25,6 +25,7 @@ async function main() {
         await prepCrossword();
     }
     if (SOLVE) {
+        let unknownGame=false;
         let solveButton = document.createElement("button");
         solveButton.innerText = "SOLVE";
         solveButton.classList.add("deltaPremium-button");
@@ -44,11 +45,19 @@ async function main() {
                 }
             } else if (document.querySelector("#crossword")) {
                 crosswordSolver();
+            }else if(document.querySelector("#boxcard")){
+                memorySolver()
+            } else{
+                console.log("Unknown game")
+                unknownGame=true
             }
         });
-        buttonContainer.append(solveButton);
+        if(!unknownGame){
+            buttonContainer.append(solveButton);
+        }
     }
     if (HELP) {
+        let unknownGame=false
         let helpButton = document.createElement("button");
         helpButton.innerText = "HELP";
         helpButton.classList.add("deltaPremium-button");
@@ -77,9 +86,16 @@ async function main() {
                 }
             } else if (document.querySelector("#crossword")) {
                 crosswordHelper();
+            }else if(document.querySelector("#boxcard")){
+                alert("Pomoc nie jest tu dostępna bo common, zrobisz to chyba cnie? Wystarczy klikać")
+            }else{
+                console.log("Unknown game")
+                unknownGame=true
             }
         });
-        buttonContainer.append(helpButton);
+        if(!unknownGame){
+            buttonContainer.append(helpButton);
+        }
     }
     if (!document.querySelector("iframe")) {
         document.querySelector("body").prepend(buttonContainer);
