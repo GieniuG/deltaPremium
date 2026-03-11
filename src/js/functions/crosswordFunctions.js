@@ -5,7 +5,6 @@ async function crosswordSolver(){
 
     a.forEach((word,wordIndex)=>{
         word.split("").forEach((letter,letterIndex)=>{
-            console.log(wordIndex,letterIndex)
             map[wordIndex][letterIndex].innerText=letter
         })
     })
@@ -15,7 +14,6 @@ async function prepCrossword(){
     url = getJsonpUrl();
     let data = await getInitpar(url);
     data = data.toUpperCase();
-    console.log(data)
     a=[...data.matchAll(/WORD\d+=TEXT%7C(.*?)&/g)].map(x=>x[1].replaceAll("%20",""));
     map=mapOutCrossword()
 }
@@ -40,8 +38,6 @@ function mapOutCrossword(){
         }
     })
     startFields.forEach(el=>{
-        let wasRightAlready=false,swap=false
-        let prevNumber=0 //for the swap operation
         //divs with numbers ie. start of (possibly) multiple words
         let numberDiv=el.querySelector("div")
         // numberDiv.id follows a pattern: grid_{x coordinate}_{y coordinate}
@@ -49,33 +45,18 @@ function mapOutCrossword(){
             y=parseInt(numberDiv.id.split("_")[2])
         numberDiv.innerText.split(",").forEach(n=>{
             n=parseInt(n)-1
-            //check down; if tue then up:
-            if(document.querySelector(`#innerCrossword #grid_${x}_${y+1}.filled`)){
-                //if up then go right
-                if(document.querySelector(`#innerCrossword #grid_${x}_${y-1}.filled`)){
-                    map[n]=getFields(x,y,1,0)
-                //if not up check right and make sure there's nothing to the left
-                }else if(!wasRightAlready && document.querySelector(`#innerCrossword #grid_${x+1}_${y}.filled`) && !document.querySelector(`#innerCrossword #grid_${x-1}_${y}.filled`)){
-                    wasRightAlready=true
-                    map[n]=getFields(x,y,1,0)
-                }else{
-                    map[n]=getFields(x,y,0,1)
-                }
-            }else if(document.querySelector(`#innerCrossword #grid_${x+1}_${y}.filled`)){
-                map[n]= getFields(x,y,1,0)
-            }
-            //we have no idea which number corresponds to vertical/horizontal fields so we're gonna have to swap them out if the number of letters is different from the number of fields
-            //its far from a perfect solution but it works i guess? Unless ofc both words have the same length
-            if(swap){
-                let temp=map[prevNumber]
-                map[prevNumber]=map[n]
-                map[n]=temp
-            }else if(a[n].length!=map[n].length){
-                swap=true
-                prevNumber=n
+
+            el.querySelector(".field").dispatchEvent(new MouseEvent("click",{bubbles:true}))
+            let b=document.querySelector("#questionDisplay b")
+            let direction=b.innerText.match(/\(.*\)/)[0]
+            if(direction=="(horizontal)"){
+                map[n]=getFields(x,y,1,0)
+            }else{
+                map[n]=getFields(x,y,0,1)
             }
         })
     })
+    document.querySelector("#questionSidePanel > div:nth-child(2) > img").dispatchEvent(new MouseEvent("click",{bubbles:true}))
     return map
 }
 /**
