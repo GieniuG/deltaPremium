@@ -68,8 +68,9 @@ function mapOutCrossword(){
 */
 function getFields(x,y,a,b){
     let arr=[]
-    while(document.querySelector(`#innerCrossword #grid_${x}_${y}.filled`)){
-        arr.push(document.querySelector(`#innerCrossword #grid_${x}_${y}.filled`))
+    let t;
+    while(t=document.querySelector(`#innerCrossword #grid_${x}_${y}.filled`)){
+        arr.push(t)
         x+=a
         y+=b
     }
