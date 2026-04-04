@@ -28,25 +28,26 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 
 async function handleVideo(url,prompt) {
-    let res = await fetch(url)
-    let blob = await res.blob()
     const API_KEY = (await api.storage.local.get("api")).api
-    console.log(blob, "a")
-    const formData = new FormData()
-    const metadata = {
-        file: {
-            display_name: "Test"
-        }
-    }
-    formData.append(
-        "metadata",
-        new Blob([JSON.stringify(metadata)], { type: "application/json" })
-    )
-    formData.append("file", blob)
     const urlB64=btoa(url)
     let uri=await getCookie(urlB64)
     if(!uri){
         console.log("cookie not found")
+        let res = await fetch(url)
+        let blob = await res.blob()
+        console.log(blob, "a")
+        const formData = new FormData()
+        const metadata = {
+            file: {
+                display_name: url
+            }
+        }
+        formData.append(
+            "metadata",
+            new Blob([JSON.stringify(metadata)], { type: "application/json" })
+        )
+        formData.append("file", blob)
+
         let upload=await fetch(`https://generativelanguage.googleapis.com/upload/v1beta/files?uploadType=multipart&key=${API_KEY}`, {
             method:"POST",
             body:formData
