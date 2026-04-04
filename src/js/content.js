@@ -1,3 +1,4 @@
+const dryRun=true
 const api = typeof browser !== 'undefined' ? browser : chrome;
 console.log("content")
 const videos = document.querySelectorAll('video')
@@ -51,17 +52,20 @@ videos.forEach(async video => {
         port.onMessage.addListener((msg)=>{
             stageInfoContainer.innerHTML=`${msg.stage} ${msg.idx}/4`
         })
-        let response=await api.runtime.sendMessage({
-          action: "handleVideo",
-          url: url,
-          prompt:textArea.value+" \n\n\n!!IMPORTANT!! Format your output as HTML tags; DO NOT include markdown codeblocks"
-        })
-        console.log(response)
-        infoBoard.style.display="none"
-        let outputArea=document.createElement("div")
-        outputArea.style.textAlign="left"
-        outputArea.innerHTML=response.content
-        div.appendChild(outputArea)
+        if(!dryRun){
+            let response=await api.runtime.sendMessage({
+              action: "handleVideo",
+              url: url,
+              prompt:textArea.value+" \n\n\n!!IMPORTANT!! Format your output as HTML tags; DO NOT include markdown codeblocks"
+            })
+            console.log(response)
+            infoBoard.style.display="none"
+            let outputArea=document.createElement("div")
+            outputArea.style.textAlign="left"
+            outputArea.innerHTML=response.content
+            div.appendChild(outputArea)
+
+        }
     })
 })
 
