@@ -93,7 +93,7 @@ async function handleVideo(url,prompt) {
             }]
         })
     }
-    let model = "gemini-2.5-flash-lite"
+    let model = "gemini-2.5-flash"
     console.log("wait for response")
     //STAGE: wait for res
     infoPort.postMessage({stage:"czekanie na odpowiedź",idx:4})
