@@ -29,22 +29,40 @@ videos.forEach(async video => {
     div.appendChild(button)
     button.addEventListener("click",async ()=>{
         console.log("click")
+        
 
+        let infoBoard=document.createElement("div")
+        infoBoard.classList.add("infoBoard")
+        div.append(infoBoard)
         let spinner=document.createElement("div")
+        let spinnerContainer=document.createElement("div")
+        spinnerContainer.append(spinner)
         spinner.classList.add("spinner")
-        div.appendChild(spinner)
 
+        infoBoard.appendChild(spinnerContainer)
+        let stageInfoContainer = document.createElement("div")
+        let stageInfo = document.createElement("p")
+        stageInfoContainer.append(stageInfo)
+        stageInfo.innerHTML="lorem 0/4"
+        infoBoard.append(stageInfoContainer)
+
+        const port=api.runtime.connect({name:"HEY"})
+        console.log(port)
+        port.onMessage.addListener((msg)=>{
+            stageInfoContainer.innerHTML=`${msg.stage} ${msg.idx}/4`
+        })
         let response=await api.runtime.sendMessage({
           action: "handleVideo",
           url: url,
           prompt:textArea.value+" \n\n\n!!IMPORTANT!! Format your output as HTML tags; DO NOT include markdown codeblocks"
         })
         console.log(response)
-        spinner.style.display="none"
+        infoBoard.style.display="none"
         let outputArea=document.createElement("div")
         outputArea.style.textAlign="left"
         outputArea.innerHTML=response.content
         div.appendChild(outputArea)
     })
 })
+
 

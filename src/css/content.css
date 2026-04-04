@@ -3,11 +3,13 @@
     width: var(--size);
     height: var(--size);
     border-radius: 100%;
-    border: 5px solid #cfa45a;
+    border: 5px solid #000080;
     border-left: 5px solid transparent;
     animation: infinite spin linear 5s;
+    /*
     position: relative;
     left:calc(100% / 2 - var(--size) / 2)
+    */
 }
 @keyframes spin {
     from{
@@ -17,4 +19,20 @@
         rotate: 359deg;
     }
     
+}
+
+.infoBoard {
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.infoBoard div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.infoBoard div p {
+    font-size: 1.4rem;
 }
