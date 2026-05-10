@@ -37,6 +37,8 @@
  ![opposites](./assets/opposites_solve.gif)
 ### Wybieranie z listy:
  ![dropdown](./assets/dropdown_solve.gif)
+### Wisielec
+ ![hangman](./assets/hangman_solve.gif)
 ## POMOC:
 ### Dopasowanie kart:
  ![karty](./assets/cards_help.gif)
@@ -46,8 +48,6 @@
  ![wordle](./assets/wordle.gif)
 ### Rozwiązywanie krzyżówki:
  ![crossword](./assets/crossword_help.gif)
+### Wisielec
+ ![hangman](./assets/hangman_help.gif)
 
-
-
-
- https://aistudio.google.com/app/apikey
