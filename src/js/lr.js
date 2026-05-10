@@ -16,6 +16,25 @@ let currWordle = undefined;
 
 let prepareLock = false;
 
+
+chrome.runtime.onMessage.addListener((r)=>{
+    applySettings().then(()=>{
+        if(!HELP){
+            document.querySelector(".help").style.display="none"
+        }else{
+            document.querySelector(".help").style.display=""
+        }
+        if(!SOLVE){
+            document.querySelector(".solve").style.display="none"
+        }else{
+            document.querySelector(".solve").style.display=""
+        }
+    })
+})
+
+
+
+
 async function main() {
     let buttonContainer = document.createElement("div");
     buttonContainer.classList.add("deltaPremium-button-container");
@@ -29,7 +48,7 @@ async function main() {
         let unknownGame=false;
         let solveButton = document.createElement("button");
         solveButton.innerText = "SOLVE";
-        solveButton.classList.add("deltaPremium-button");
+        solveButton.classList.add("deltaPremium-button","solve");
 
 
         //----------------------------------------------------------BUTTON
@@ -68,7 +87,7 @@ async function main() {
         let unknownGame=false
         let helpButton = document.createElement("button");
         helpButton.innerText = "HELP";
-        helpButton.classList.add("deltaPremium-button");
+        helpButton.classList.add("deltaPremium-button","help");
         if (document.querySelector("#content")) {
             //quiz only needs to be prepared for help
                 if (MODE == "default") {
@@ -78,7 +97,6 @@ async function main() {
                     prepareQuizWordle();
                 }
         }
-
         //----------------------------------------------------------BUTTON
         helpButton.addEventListener("click", () => {
             if (document.querySelector("#cards")) {

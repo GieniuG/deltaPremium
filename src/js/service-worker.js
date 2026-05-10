@@ -22,6 +22,10 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
         }
         )
         return true;
+    }else if(request.action === "updateButtons"){
+        api.tabs.query({active:true,currentWindow:true},tab=>{
+            api.tabs.sendMessage(tab[0].id,{action:"Hi"})
+        })
     }
 });
 
