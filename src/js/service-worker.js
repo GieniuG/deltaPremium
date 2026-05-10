@@ -22,31 +22,48 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
         }
         )
         return true;
+    }else if(request.action === "updateButtons"){
+        api.tabs.query({active:true,currentWindow:true},tab=>{
+            api.tabs.sendMessage(tab[0].id,{action:"Hi"})
+        })
     }
 });
 
+let infoPort=null
+api.runtime.onConnect.addListener((port)=>{
+    infoPort=port
+})
 
 
 async function handleVideo(url,prompt) {
-    let res = await fetch(url)
-    let blob = await res.blob()
+    console.log(infoPort)
     const API_KEY = (await api.storage.local.get("api")).api
-    console.log(blob, "a")
-    const formData = new FormData()
-    const metadata = {
-        file: {
-            display_name: "Test"
-        }
-    }
-    formData.append(
-        "metadata",
-        new Blob([JSON.stringify(metadata)], { type: "application/json" })
-    )
-    formData.append("file", blob)
     const urlB64=btoa(url)
     let uri=await getCookie(urlB64)
     if(!uri){
         console.log("cookie not found")
+        //STAGE: get video
+        console.log(infoPort)
+        infoPort.postMessage({stage:"pobieranie wideo",idx:1})
+        console.log(url)
+        let res = await fetch(url,{cache: 'no-store'})
+        console.log(res)
+        let blob = await res.blob()
+        console.log(blob, "a")
+        const formData = new FormData()
+        const metadata = {
+            file: {
+                display_name: url
+            }
+        }
+        formData.append(
+            "metadata",
+            new Blob([JSON.stringify(metadata)], { type: "application/json" })
+        )
+        formData.append("file", blob)
+        console.log("upload video")
+        //STAGE: upload video
+        infoPort.postMessage({stage:"upload do gemini",idx:2})
         let upload=await fetch(`https://generativelanguage.googleapis.com/upload/v1beta/files?uploadType=multipart&key=${API_KEY}`, {
             method:"POST",
             body:formData
@@ -54,6 +71,9 @@ async function handleVideo(url,prompt) {
         upload = await upload.json()
         let state = "PROCESSING"
         uri = upload.file.uri
+        console.log("video processing")
+        //STAGE: video processing
+        infoPort.postMessage({stage:"przetwarzanie wideo przez gemini",idx:3})
         while (state == "PROCESSING") {
             let resp = await fetch(uri + `?key=${API_KEY}`)
             resp = await resp.json()
@@ -81,6 +101,9 @@ async function handleVideo(url,prompt) {
         })
     }
     let model = "gemini-2.5-flash"
+    console.log("wait for response")
+    //STAGE: wait for res
+    infoPort.postMessage({stage:"czekanie na odpowiedź",idx:4})
     let geminiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${API_KEY}`, payload)
 
     console.log(geminiResponse)

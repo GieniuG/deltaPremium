@@ -2,6 +2,7 @@ const api = typeof browser !== 'undefined' ? browser : chrome;
 
 document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener('change', ()=>{
+        api.runtime.sendMessage({action:"updateButtons"})
         if(checkbox.id=='auto-solve'){
             api.storage.local.set({"autoSolve":checkbox.checked})
         }else if(checkbox.id=='helper'){
