@@ -24,11 +24,15 @@ async function main() {
     if (document.querySelector("#crossword")) {
         await prepCrossword();
     }
+    //-------------------------------------------------------------SOLVE
     if (SOLVE) {
         let unknownGame=false;
         let solveButton = document.createElement("button");
         solveButton.innerText = "SOLVE";
         solveButton.classList.add("deltaPremium-button");
+
+
+        //----------------------------------------------------------BUTTON
         solveButton.addEventListener("click", () => {
             if (document.querySelector("#cards")) {
                 if(document.querySelector(".card textarea")){
@@ -39,7 +43,10 @@ async function main() {
             } else if (document.querySelector("#content")) {
                 if(document.querySelector(".dropdown")){
                     dropdownSolver();
-                }else{
+                }else if(document.querySelector("#keyboard")){
+                    hangmanSolver();
+                }
+                else{
                     console.log("quiz")
                     quizSolver();
                 }
@@ -56,6 +63,7 @@ async function main() {
             buttonContainer.append(solveButton);
         }
     }
+    //-------------------------------------------------------------HELP
     if (HELP) {
         let unknownGame=false
         let helpButton = document.createElement("button");
@@ -70,6 +78,8 @@ async function main() {
                     prepareQuizWordle();
                 }
         }
+
+        //----------------------------------------------------------BUTTON
         helpButton.addEventListener("click", () => {
             if (document.querySelector("#cards")) {
                 if(document.querySelector(".card textarea")){
@@ -81,6 +91,8 @@ async function main() {
             } else if (document.querySelector("#content")) {
                 if(document.querySelector(".dropdown")){
                     alert("Pomoc nie jest dostepna w tym trybie (i nie będzie)")
+                }else if(document.querySelector("#keyboard")){
+                    hangmanHelper();
                 }else{
                     quizHelper();
                 }
@@ -97,6 +109,11 @@ async function main() {
             buttonContainer.append(helpButton);
         }
     }
+
+
+
+
+
     if (!document.querySelector("iframe")) {
         document.querySelector("body").prepend(buttonContainer);
     }

@@ -1,10 +1,11 @@
-const dryRun=true
+const dryRun=false
 const api = typeof browser !== 'undefined' ? browser : chrome;
 console.log("content")
 const videos = document.querySelectorAll('video')
 
 videos.forEach(async video => {
     url = video.querySelector('source').src
+    console.log(url)
     let div = document.createElement("div")
     div.style.width = "100%"
     div.style.textAlign = "center"
@@ -31,22 +32,23 @@ videos.forEach(async video => {
     button.addEventListener("click",async ()=>{
         console.log("click")
         
-
+        //Create a section with info about stages
         let infoBoard=document.createElement("div")
         infoBoard.classList.add("infoBoard")
         div.append(infoBoard)
+
         let spinner=document.createElement("div")
         let spinnerContainer=document.createElement("div")
-        spinnerContainer.append(spinner)
         spinner.classList.add("spinner")
-
+        spinnerContainer.append(spinner)
         infoBoard.appendChild(spinnerContainer)
+
         let stageInfoContainer = document.createElement("div")
         let stageInfo = document.createElement("p")
-        stageInfoContainer.append(stageInfo)
         stageInfo.innerHTML="lorem 0/4"
+        stageInfoContainer.append(stageInfo)
         infoBoard.append(stageInfoContainer)
-
+        //----
         const port=api.runtime.connect({name:"HEY"})
         console.log(port)
         port.onMessage.addListener((msg)=>{
@@ -64,7 +66,8 @@ videos.forEach(async video => {
             outputArea.style.textAlign="left"
             outputArea.innerHTML=response.content
             div.appendChild(outputArea)
-
+        }else{
+            console.log('%cDRY RUN','color:red;font-size:14px')
         }
     })
 })

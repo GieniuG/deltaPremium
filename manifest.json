@@ -33,6 +33,7 @@
                 "./src/js/functions/quizFunctions.js",
                 "./src/js/functions/crosswordFunctions.js",
                 "./src/js/functions/oppositesFunctions.js",
+                "./src/js/functions/hangmanFunctions.js",
                 "./src/js/functions/memoryFunctions.js"
             ],
             "css": [

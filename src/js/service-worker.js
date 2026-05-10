@@ -39,8 +39,11 @@ async function handleVideo(url,prompt) {
     if(!uri){
         console.log("cookie not found")
         //STAGE: get video
+        console.log(infoPort)
         infoPort.postMessage({stage:"pobieranie wideo",idx:1})
-        let res = await fetch(url)
+        console.log(url)
+        let res = await fetch(url,{cache: 'no-store'})
+        console.log(res)
         let blob = await res.blob()
         console.log(blob, "a")
         const formData = new FormData()
