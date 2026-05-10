@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "version": "2.4.2",
+    "version": "2.5.0",
     "name": "DeltaPremium",
     "permissions": [
         "activeTab",
@@ -33,6 +33,7 @@
                 "./src/js/functions/quizFunctions.js",
                 "./src/js/functions/crosswordFunctions.js",
                 "./src/js/functions/oppositesFunctions.js",
+                "./src/js/functions/hangmanFunctions.js",
                 "./src/js/functions/memoryFunctions.js"
             ],
             "css": [
