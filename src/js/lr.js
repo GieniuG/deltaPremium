@@ -43,6 +43,9 @@ async function main() {
     if (document.querySelector("#crossword")) {
         await prepCrossword();
     }
+    if(document.querySelector("#keyboard")){
+        useKeyboard() //use your real keyboard instead of the screen one
+    }
     //-------------------------------------------------------------SOLVE
     if (SOLVE) {
         let unknownGame=false;
