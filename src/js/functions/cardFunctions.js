@@ -38,6 +38,7 @@ function clearCards() {
 }
 function cardHelper() {
   console.log("HELPER ENABLED");
+  let prepareLock=false
   if (!prepareLock) {
     document.querySelectorAll("#cards .card").forEach((card, index) => {
       card.addEventListener("click", () => {
@@ -50,8 +51,7 @@ function cardHelper() {
         let cardsLeft = document.querySelectorAll(".card:not(.correct)");
         for (let i = 0; i < cardsLeft.length / 2; i++) {
           let idx =
-            2 * Math.floor(Math.random() * Math.floor(cardsLeft.length / 2)) +
-            !(index % 2);
+            2 * Math.floor(Math.random() * Math.floor(cardsLeft.length / 2)) + !(index % 2);
           cardsLeft[idx].classList.add("possible");
         }
         showHelp = false;
