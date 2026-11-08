@@ -205,7 +205,7 @@ function prepareQuizWordle() {
 async function dropdownSolver() {
     let url = getJsonpUrl();
     let data = await getInitpar(url);
-    data = data.toLowerCase().replace(/%20/g, "");
+    data = data.toLowerCase().replace(/%20/g, " ");
     let i = 0;
     let buttons = document.querySelectorAll(".btn");
     for (ans of data.matchAll(/cloze\d+=(.*?)&/g)) {
