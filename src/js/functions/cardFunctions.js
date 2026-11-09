@@ -36,10 +36,14 @@ function clearCards() {
     .querySelectorAll(".possible")
     .forEach((n) => n.classList.remove("possible"));
 }
+
+
+
+let prepareLock_cardHelper=false
 function cardHelper() {
   console.log("HELPER ENABLED");
-  let prepareLock=false
-  if (!prepareLock) {
+  if (!prepareLock_cardHelper) {
+      console.log("F")
     document.querySelectorAll("#cards .card").forEach((card, index) => {
       card.addEventListener("click", () => {
         if (!showHelp) return;
@@ -57,16 +61,16 @@ function cardHelper() {
         showHelp = false;
       });
     });
-    prepareLock = true;
+    prepareLock_cardHelper = true;
+      let observer = new MutationObserver((mutation) => {
+        if (mutation[0].target.classList.contains("correct")) {
+          clearCards();
+        }
+      });
+      observer.observe(document.querySelector("#cards"), {
+        subtree: true,
+        attributes: true,
+        attributeFilter: ["class"],
+      });
   }
-  let observer = new MutationObserver((mutation) => {
-    if (mutation[0].target.classList.contains("correct")) {
-      clearCards();
-    }
-  });
-  observer.observe(document.querySelector("#cards"), {
-    subtree: true,
-    attributes: true,
-    attributeFilter: ["class"],
-  });
 }
