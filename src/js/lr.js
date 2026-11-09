@@ -96,7 +96,9 @@ async function main() {
             }
         } else if (document.querySelector("#content")) {
             if(document.querySelector(".dropdown")){
-                alert("Pomoc nie jest dostepna w tym trybie (i nie będzie)")
+                showHelp = true;
+                dropdownHelper();
+                //alert("Pomoc nie jest dostepna w tym trybie (i nie będzie)")
             }else if(document.querySelector("#keyboard")){
                 hangmanHelper();
             }else{

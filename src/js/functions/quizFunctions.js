@@ -202,6 +202,17 @@ function prepareQuizWordle() {
         });
 }
 
+
+
+
+function dropdownSelectAns(button, ans) {
+    button.nextElementSibling.querySelectorAll("li").forEach((li) => {
+        let a = li.querySelector("a");
+        if (a.getAttribute("data-value").toLowerCase() == ans) {
+            a.dispatchEvent(new MouseEvent("click", { bubbles: true, button: 0 }));
+        }
+    });
+}
 async function dropdownSolver() {
     let url = getJsonpUrl();
     let data = await getInitpar(url);
@@ -210,17 +221,30 @@ async function dropdownSolver() {
     let buttons = document.querySelectorAll(".btn");
     for (ans of data.matchAll(/cloze\d+=(.*?)&/g)) {
         let button = buttons[i++];
-        button.dispatchEvent(
-            new MouseEvent("click", { bubbles: true, button: 0 }),
-        );
-        button.nextElementSibling.querySelectorAll("li").forEach((li) => {
-            let a = li.querySelector("a");
-            if (
-                a.getAttribute("data-value").toLowerCase() ==
-                ans[1]
-            ) {
-                a.dispatchEvent(new MouseEvent("click", { bubbles: true, button: 0 }));
-            }
-        });
+        dropdownSelectAns(button, ans[1])
+    }
+}
+
+let State_dropdownHelper = {
+    lock: false,
+    ans: [],
+}
+async function dropdownHelper() {
+    if (!State_dropdownHelper.lock) {
+        let url = getJsonpUrl();
+        let data = await getInitpar(url);
+        data = data.toLowerCase().replace(/%20/g, " ");
+        data.matchAll(/cloze\d+=(.*?)&/g).forEach(e => State_dropdownHelper.ans.push(e[1]))
+        document.querySelectorAll(".btn").forEach((btn, idx) => {
+            btn.addEventListener("click", (ev) => {
+                if (showHelp) {
+                    dropdownSelectAns(btn, State_dropdownHelper.ans[idx])
+                    showHelp = false
+                    ev.stopPropagation()
+                }
+            })
+        })
+
+        State_dropdownHelper.lock = true
     }
 }
