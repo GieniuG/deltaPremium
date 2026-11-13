@@ -239,7 +239,7 @@ async function dropdownHelper() {
             btn.addEventListener("click", (ev) => {
                 if (showHelp) {
                     dropdownSelectAns(btn, State_dropdownHelper.ans[idx])
-                    showHelp = false
+                    toggleHelp()
                     ev.stopPropagation()
                 }
             })

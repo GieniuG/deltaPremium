@@ -36,7 +36,14 @@ function setButtons(){
     helpButton.style.display=HELP?"":"none"
     solveButton.style.display=SOLVE?"":"none"
 }
-
+function toggleHelp(btn){
+    showHelp=!showHelp
+    if(showHelp){
+        helpButton.classList.add("btn-help-activated")
+    }else{
+        helpButton.classList.remove("btn-help-activated")
+    }
+}
 
 async function main() {
     setButtons()
@@ -91,14 +98,13 @@ async function main() {
             if(document.querySelector(".card textarea")){
                 alert("Pomoc nie jest dostepna w tym trybie (na razie)")
             }else{
-                showHelp = true;
+                toggleHelp();
                 cardHelper();
             }
         } else if (document.querySelector("#content")) {
             if(document.querySelector(".dropdown")){
-                showHelp = true;
+                toggleHelp()
                 dropdownHelper();
-                //alert("Pomoc nie jest dostepna w tym trybie (i nie będzie)")
             }else if(document.querySelector("#keyboard")){
                 hangmanHelper();
             }else{

@@ -58,7 +58,7 @@ function cardHelper() {
             2 * Math.floor(Math.random() * Math.floor(cardsLeft.length / 2)) + !(index % 2);
           cardsLeft[idx].classList.add("possible");
         }
-        showHelp = false;
+        toggleHelp()
       });
     });
     prepareLock_cardHelper = true;

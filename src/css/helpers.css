@@ -86,3 +86,7 @@
     }
     
 }
+.btn-help-activated{
+    background-color: lightblue;
+    color: white;
+}
