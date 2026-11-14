@@ -17,59 +17,59 @@ videos.forEach(async video => {
     div.appendChild(a)
     video.parentNode.appendChild(div)
     //---------------
-    div.style.display = "flex"
-    div.style.flexDirection = "column"
-    let textArea = document.createElement("textarea")
-    textArea.rows="7"
-    let defaultMessage="Keep it concise; Respond to these questions based on the provided video:"
-    textArea.value=defaultMessage
-    div.appendChild(textArea)
-    let button=document.createElement("button")
+    //div.style.display = "flex"
+    //div.style.flexDirection = "column"
+    //let textArea = document.createElement("textarea")
+    //textArea.rows="7"
+    //let defaultMessage="Keep it concise; Respond to these questions based on the provided video:"
+    //textArea.value=defaultMessage
+    //div.appendChild(textArea)
+    //let button=document.createElement("button")
 
-    const api = typeof browser !== 'undefined' ? browser : chrome;
-    button.innerHTML="SEND"
-    div.appendChild(button)
-    button.addEventListener("click",async ()=>{
-        console.log("click")
-        
-        //Create a section with info about stages
-        let infoBoard=document.createElement("div")
-        infoBoard.classList.add("infoBoard")
-        div.append(infoBoard)
+    //const api = typeof browser !== 'undefined' ? browser : chrome;
+    //button.innerHTML="SEND"
+    //div.appendChild(button)
+    //button.addEventListener("click",async ()=>{
+    //    console.log("click")
+    //    
+    //    //Create a section with info about stages
+    //    let infoBoard=document.createElement("div")
+    //    infoBoard.classList.add("infoBoard")
+    //    div.append(infoBoard)
 
-        let spinner=document.createElement("div")
-        let spinnerContainer=document.createElement("div")
-        spinner.classList.add("spinner")
-        spinnerContainer.append(spinner)
-        infoBoard.appendChild(spinnerContainer)
+    //    let spinner=document.createElement("div")
+    //    let spinnerContainer=document.createElement("div")
+    //    spinner.classList.add("spinner")
+    //    spinnerContainer.append(spinner)
+    //    infoBoard.appendChild(spinnerContainer)
 
-        let stageInfoContainer = document.createElement("div")
-        let stageInfo = document.createElement("p")
-        stageInfo.innerHTML="lorem 0/4"
-        stageInfoContainer.append(stageInfo)
-        infoBoard.append(stageInfoContainer)
-        //----
-        const port=api.runtime.connect({name:"HEY"})
-        console.log(port)
-        port.onMessage.addListener((msg)=>{
-            stageInfoContainer.innerHTML=`${msg.stage} ${msg.idx}/4`
-        })
-        if(!dryRun){
-            let response=await api.runtime.sendMessage({
-              action: "handleVideo",
-              url: url,
-              prompt:textArea.value+" \n\n\n!!IMPORTANT!! Format your output as HTML tags; DO NOT include markdown codeblocks"
-            })
-            console.log(response)
-            infoBoard.style.display="none"
-            let outputArea=document.createElement("div")
-            outputArea.style.textAlign="left"
-            outputArea.innerHTML=response.content
-            div.appendChild(outputArea)
-        }else{
-            console.log('%cDRY RUN','color:red;font-size:14px')
-        }
-    })
+    //    let stageInfoContainer = document.createElement("div")
+    //    let stageInfo = document.createElement("p")
+    //    stageInfo.innerHTML="lorem 0/4"
+    //    stageInfoContainer.append(stageInfo)
+    //    infoBoard.append(stageInfoContainer)
+    //    //----
+    //    const port=api.runtime.connect({name:"HEY"})
+    //    console.log(port)
+    //    port.onMessage.addListener((msg)=>{
+    //        stageInfoContainer.innerHTML=`${msg.stage} ${msg.idx}/4`
+    //    })
+    //    if(!dryRun){
+    //        let response=await api.runtime.sendMessage({
+    //          action: "handleVideo",
+    //          url: url,
+    //          prompt:textArea.value+" \n\n\n!!IMPORTANT!! Format your output as HTML tags; DO NOT include markdown codeblocks"
+    //        })
+    //        console.log(response)
+    //        infoBoard.style.display="none"
+    //        let outputArea=document.createElement("div")
+    //        outputArea.style.textAlign="left"
+    //        outputArea.innerHTML=response.content
+    //        div.appendChild(outputArea)
+    //    }else{
+    //        console.log('%cDRY RUN','color:red;font-size:14px')
+    //    }
+    //})
 })
 
 
